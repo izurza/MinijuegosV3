@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PalomitasCreator : MonoBehaviour
+public class PalomitaCreatorV2 : MonoBehaviour
 {
     public GameObject camara;
     public GameObject panel;
@@ -30,23 +30,24 @@ public class PalomitasCreator : MonoBehaviour
         InvokeRepeating("CrearPalomita", 3.0f, 0.4f);
     }
 
+
     public void CrearPalomita()
     {
-        ancho = Random.Range(margenHorizontal, Screen.width-margenHorizontal);
-        alto = Random.Range(margenVertical, Screen.height-margenVertical-(Screen.height+panel.GetComponent<RectTransform>().sizeDelta.y));
+        ancho = Random.Range(margenHorizontal, Screen.width - margenHorizontal);
+        alto = Screen.height - margenVertical - (Screen.height + panel.GetComponent<RectTransform>().sizeDelta.y);
 
-        //Debug.Log(ancho + "--" + alto);
         posPalomitaWorld = camara.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(ancho, alto, camara.transform.position.z));
         posPalomitaWorld.z = 0.0f;
 
-        palomitaRandom = Random.Range(0,100);
-        if (palomitaRandom<=80){
-          palomitaClon = (GameObject)Instantiate(palomita, posPalomitaWorld, Quaternion.identity);
+        palomitaRandom = Random.Range(0, 100);
+        if (palomitaRandom <= 80)
+        {
+            palomitaClon = (GameObject)Instantiate(palomita, posPalomitaWorld, Quaternion.identity);
         }
-        else {
-          palomitaRojaClon = (GameObject)Instantiate(palomitaRoja, posPalomitaWorld, Quaternion.identity);
+        else
+        {
+            palomitaRojaClon = (GameObject)Instantiate(palomitaRoja, posPalomitaWorld, Quaternion.identity);
         }
-
 
 
         if (General.GetSegundos() <= 0)
@@ -54,9 +55,9 @@ public class PalomitasCreator : MonoBehaviour
             CancelInvoke("CrearPalomita");
         }
     }
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
-
+        
     }
 }
