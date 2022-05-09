@@ -7,14 +7,19 @@ public class PalomitasCreator : MonoBehaviour
 {
     public GameObject camara;
     public GameObject panel;
+
     public GameObject palomita;
     private GameObject palomitaClon;
+
+    public GameObject palomitaRoja;
+    private GameObject palomitaRojaClon;
 
     private float ancho;
     private float alto;
     private float margenVertical;
     private float margenHorizontal;
 
+    private int palomitaRandom;
 
     private Vector3 posPalomitaWorld;
     // Start is called before the first frame update
@@ -30,11 +35,20 @@ public class PalomitasCreator : MonoBehaviour
     {
         ancho = Random.Range(margenHorizontal, Screen.width-margenHorizontal);
         alto = Random.Range(margenVertical, Screen.height-margenVertical-(Screen.height+panel.GetComponent<RectTransform>().sizeDelta.y));
-     
+
         //Debug.Log(ancho + "--" + alto);
         posPalomitaWorld = camara.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(ancho, alto, camara.transform.position.z));
         posPalomitaWorld.z = 0.0f;
-        palomitaClon = (GameObject)Instantiate(palomita, posPalomitaWorld, Quaternion.identity);
+
+        palomitaRandom = Random.Range(0,100);
+        if (palomitaRandom<=80){
+          palomitaClon = (GameObject)Instantiate(palomita, posPalomitaWorld, Quaternion.identity);
+        }
+        else {
+          palomitaRojaClon = (GameObject)Instantiate(palomitaRoja, posPalomitaWorld, Quaternion.identity);
+        }
+
+
 
         if (General.GetSegundos() <= 0)
         {
@@ -44,6 +58,6 @@ public class PalomitasCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

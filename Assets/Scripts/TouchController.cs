@@ -31,11 +31,17 @@ public class TouchController : MonoBehaviour
             {
                 if (General.GetSegundos() > 0)
                 {
+                  if (hit.collider.gameObject.tag == "Palomita"){
                     General.SetNumPalomitasDestruidas(General.GetNumPalomitasDestruidas() + 1);
+                  }
+                  else{
+                    General.SetNumPalomitasDestruidas(General.GetNumPalomitasDestruidas() - 3);
+                  }
+
                     this.GetComponent<UIController>().SetNumPalomitas();
                     Destroy(hit.collider.gameObject);
                 }
-                
+
             }
 
 

@@ -9,13 +9,13 @@ public class UIController : MonoBehaviour
 
     private GameObject logo;
 
-    public GameObject acumulador; 
+    public GameObject acumulador;
     public Text numPalomitas;
     public Text crono;
     public Text record;
 
     public GameObject panelFinal;
-   
+    public GameObject panelInicio;
 
 
     private void Awake()
@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
             Invoke("IrMenuPrincipal", 3.0f);
         }
 
-       
+
 
     }
 
@@ -69,36 +69,52 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        panelFinal.SetActive(false);
-        InvokeRepeating("Crono", 3.0f, 1.0f);
+        General.SetSegundos(General.GetSegundosRestorer());
+        General.SetSegundosInicio(General.GetSegundosInicioRestorer());
+        if (panelInicio!=null) panelInicio.transform.GetChild(2).GetComponent<Text>().text = General.GetSegundosInicio().ToString();
+        if (panelFinal!=null) {
+          panelFinal.SetActive(false);
+          InvokeRepeating("Crono", 4.0f, 1.0f);
+          InvokeRepeating("CronoInicio", 1.0f, 1.0f);
+        }
     }
+
+    private void CronoInicio(){
+        General.SetSegundosInicio(General.GetSegundosInicio()-1);
+        panelInicio.transform.GetChild(2).GetComponent<Text>().text = General.GetSegundosInicio().ToString();
+        if (General.GetSegundosInicio()<=0){
+          CancelInvoke("CronoInicio");
+          panelInicio.SetActive(false);
+        }
+    }
+
     private void Crono()
     {
-        General.SetSegundos(General.GetSegundos() - 1);
+        General.SetSegundos(General.GetSegundos()-1);
         this.GetComponent<UIController>().SetCrono();
 
-        
+
 
         if (General.GetSegundos() <= 0)
         {
             panelFinal.SetActive(true);
-            panelFinal.transform.GetChild(5).GetComponent<Text>().enabled = false;
+            panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = false;
             if (this.GetComponent<Persistencia>().ExisteRecord())
             {
                 if (General.GetNumPalomitasDestruidas() > this.GetComponent<Persistencia>().GetRecord())
                 {
                     this.GetComponent<Persistencia>().SetRecord(General.GetNumPalomitasDestruidas());
-                    panelFinal.transform.GetChild(5).GetComponent<Text>().enabled = true;
+                    panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = true;
                 }
             }
             else
             {
                 this.GetComponent<Persistencia>().SetRecord(General.GetNumPalomitasDestruidas());
-                panelFinal.transform.GetChild(5).GetComponent<Text>().enabled = true;
+                panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = true;
             }
             CancelInvoke("Crono");
-            panelFinal.transform.GetChild(4).GetComponent<Text>().text = "Palomitas:\n" + General.GetNumPalomitasDestruidas();
-            
+            panelFinal.transform.GetChild(3).GetComponent<Text>().text = "Palomitas:\n" + General.GetNumPalomitasDestruidas();
+
 
         }
     }
@@ -106,6 +122,6 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+
     }
 }
