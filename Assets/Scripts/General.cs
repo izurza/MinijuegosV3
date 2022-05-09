@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class General
 {
-    private static int segundos = 10;
-    private static int segundosRestorer = 10;
+    private static int segundos = 60;
+    private static int segundosRestorer = 60;
     private static int segundosInicio = 3;
     private static int segundosInicioRestorer = 3;
     private static int numPalomitasDestruidas = 0;
