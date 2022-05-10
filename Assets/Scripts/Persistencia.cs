@@ -4,16 +4,41 @@ using UnityEngine;
 
 public class Persistencia : MonoBehaviour
 {
+    private GameObject mj1;
+    private GameObject mj2;
+    private GameObject mj3;
     private void Start()
     {
-        if (ExisteRecord())
+        mj1 = (GameObject)GameObject.FindGameObjectWithTag("mj1");
+        mj2 = (GameObject)GameObject.FindGameObjectWithTag("mj2");
+        mj3 = (GameObject)GameObject.FindGameObjectWithTag("mj3");
+
+        if (mj1 != null)
         {
-            this.GetComponent<UIController>().SetRecord(GetRecord());
+            if (ExisteRecord())
+            {
+                this.GetComponent<UIController>().SetRecord(GetRecord());
+            }
+            else
+            {
+                this.GetComponent<UIController>().BorrarRecord();
+            }
         }
-        else
+        if (mj2 != null)
         {
-            this.GetComponent<UIController>().BorrarRecord();
+            if (ExisteRecord2())
+            {
+                Debug.Log("aqui");
+                this.GetComponent<UIController>().SetRecord(GetRecord2());
+            }
+            else
+            {
+                Debug.Log("holaa");
+                this.GetComponent<UIController>().BorrarRecord();
+            }
         }
+        //if (mj3 != null) if (ExisteRecord3()) this.GetComponent<UIController>().SetRecord(GetRecord3()); else this.GetComponent<UIController>().BorrarRecord();
+
     }
     public int GetRecord()
     {
@@ -35,8 +60,29 @@ public class Persistencia : MonoBehaviour
         PlayerPrefs.DeleteKey("RECORD");
     }
 
+    public int GetRecord2()
+    {
+        return PlayerPrefs.GetInt("RECORD2");
+    }
+
+    public void SetRecord2(int r)
+    {
+        PlayerPrefs.SetInt("RECORD2", r);
+    }
+
+    public bool ExisteRecord2()
+    {
+        return PlayerPrefs.HasKey("RECORD2");
+    }
+
+    public void DeleteRecord2()
+    {
+        PlayerPrefs.DeleteKey("RECORD2");
+    }
+
     public void DeleteAll()
     {
         PlayerPrefs.DeleteAll();
     }
 }
+

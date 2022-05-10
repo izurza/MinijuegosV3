@@ -8,6 +8,12 @@ TagManager:
   - prueba
   - Palomita
   - PalomitaRoja
+  - cubo
+  - mj2
+  - mj1
+  - mj3
+  - puerta
+  - Laberinto
   layers:
   - Default
   - TransparentFX

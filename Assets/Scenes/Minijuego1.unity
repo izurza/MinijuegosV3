@@ -173,7 +173,7 @@ MonoBehaviour:
   crono: {fileID: 974643820}
   record: {fileID: 124091794}
   panelFinal: {fileID: 635465635}
-  panelInicio: {fileID: 0}
+  panelInicio: {fileID: 1047703833}
 --- !u!4 &2567833
 Transform:
   m_ObjectHideFlags: 0
@@ -203,6 +203,8 @@ MonoBehaviour:
   camara: {fileID: 350698290}
   panel: {fileID: 727739022}
   palomita: {fileID: 1077696007355614997, guid: 46c29b5a06645964eab28154398339a9,
+    type: 3}
+  palomitaRoja: {fileID: 8534875664695518655, guid: 064572c2d39a74eaa81d634b87d66f8f,
     type: 3}
 --- !u!114 &2567835
 MonoBehaviour:
@@ -969,7 +971,7 @@ GameObject:
   - component: {fileID: 727739024}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: mj1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

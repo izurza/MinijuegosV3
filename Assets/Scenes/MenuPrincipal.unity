@@ -1077,6 +1077,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d125fb01275ceed4795b0903b2aee0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acumulador: {fileID: 0}
+  numPalomitas: {fileID: 0}
+  crono: {fileID: 0}
+  record: {fileID: 0}
+  panelFinal: {fileID: 0}
+  panelInicio: {fileID: 0}
 --- !u!4 &1163350072
 Transform:
   m_ObjectHideFlags: 0
@@ -1499,7 +1505,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c630e1877ee94174da81ec3b56c0dac5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
