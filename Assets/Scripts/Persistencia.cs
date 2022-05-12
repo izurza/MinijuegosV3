@@ -28,16 +28,24 @@ public class Persistencia : MonoBehaviour
         {
             if (ExisteRecord2())
             {
-                Debug.Log("aqui");
                 this.GetComponent<UIController>().SetRecord(GetRecord2());
             }
             else
             {
-                Debug.Log("holaa");
                 this.GetComponent<UIController>().BorrarRecord();
             }
         }
-        //if (mj3 != null) if (ExisteRecord3()) this.GetComponent<UIController>().SetRecord(GetRecord3()); else this.GetComponent<UIController>().BorrarRecord();
+        if (mj3 != null)
+        {
+            if (ExisteRecord3())
+            {
+                this.GetComponent<UIController>().SetRecord(GetRecord3());
+            }
+            else
+            {
+                this.GetComponent<UIController>().BorrarRecord();
+            }
+        }
 
     }
     public int GetRecord()
@@ -78,6 +86,26 @@ public class Persistencia : MonoBehaviour
     public void DeleteRecord2()
     {
         PlayerPrefs.DeleteKey("RECORD2");
+    }
+
+    public int GetRecord3()
+    {
+        return PlayerPrefs.GetInt("RECORD3");
+    }
+
+    public void SetRecord3(int r)
+    {
+        PlayerPrefs.SetInt("RECORD3", r);
+    }
+
+    public bool ExisteRecord3()
+    {
+        return PlayerPrefs.HasKey("RECORD3");
+    }
+
+    public void DeleteRecord3()
+    {
+        PlayerPrefs.DeleteKey("RECORD3");
     }
 
     public void DeleteAll()

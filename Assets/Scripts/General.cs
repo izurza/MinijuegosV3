@@ -13,6 +13,8 @@ public static class General
     private static int numPalomitasDestruidas = 0;
     private static int numPalomitasAtrapadas = 0;
 
+    private static bool win = false;
+
     public static int GetSegundos()
     {
         return segundos;
@@ -20,6 +22,19 @@ public static class General
     public static void SetSegundos(int s)
     {
        segundos = s;
+    }
+
+    public static bool GetWin()
+    {
+        return win;
+    }
+    public static void SetWin(bool w)
+    {
+        win = w;
+    }
+    public static void ResetWin()
+    {
+        win = false;
     }
 
     public static int GetTimer()
@@ -74,6 +89,11 @@ public static class General
     public static void SetNumPalomitasDestruidas(int n)
     {
         numPalomitasDestruidas = n;
+    }
+    public static void ResetPalomitas()
+    {
+        numPalomitasDestruidas = 0;
+        numPalomitasAtrapadas = 0;
     }
     public static int GetNumPalomitasAtrapadas()
     {

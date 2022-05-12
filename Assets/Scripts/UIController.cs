@@ -47,6 +47,10 @@ public class UIController : MonoBehaviour
     {
         crono.text = "TIMER:\n\n"+ General.GetSegundos().ToString();
     }
+    public void SetCrono3()
+    {
+        crono.text = "TIMER:\n\n" + General.GetTimer().ToString();
+    }
 
     public void SetRecord(int r)
     {
@@ -80,10 +84,18 @@ public class UIController : MonoBehaviour
         mj1 = (GameObject)GameObject.FindGameObjectWithTag("mj1");
         mj2 = (GameObject)GameObject.FindGameObjectWithTag("mj2");
         mj3 = (GameObject)GameObject.FindGameObjectWithTag("mj3");
-
-        
-        General.SetSegundos(General.GetSegundosRestorer());
-        General.SetSegundosInicio(General.GetSegundosInicioRestorer());
+        this.GetComponent<Persistencia>().DeleteAll();
+        if (mj1!=null || mj2 != null)
+        {
+            General.SetSegundos(General.GetSegundosRestorer());
+            General.SetSegundosInicio(General.GetSegundosInicioRestorer());
+            General.ResetPalomitas();
+        }
+        if (mj3 != null)
+        {
+            General.SetTimer(General.GetTimerRestorer());
+            General.ResetWin();
+        }
        
         if (panelInicio!=null) panelInicio.transform.GetChild(2).GetComponent<Text>().text = General.GetSegundosInicio().ToString();
 
@@ -173,29 +185,29 @@ public class UIController : MonoBehaviour
     private void Crono3()
     {
         General.SetTimer(General.GetTimer() + 1);
-        this.GetComponent<UIController>().SetCrono();
+        this.GetComponent<UIController>().SetCrono3();
 
 
 
-        if (General.GetSegundos() <= 0)
+        if (General.GetWin())
         {
             panelFinal.SetActive(true);
             panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = false;
-            if (this.GetComponent<Persistencia>().ExisteRecord())
+            if (this.GetComponent<Persistencia>().ExisteRecord3())
             {
-                if (General.GetNumPalomitasDestruidas() > this.GetComponent<Persistencia>().GetRecord())
+                if (General.GetTimer() < this.GetComponent<Persistencia>().GetRecord3())
                 {
-                    this.GetComponent<Persistencia>().SetRecord(General.GetNumPalomitasDestruidas());
+                    this.GetComponent<Persistencia>().SetRecord3(General.GetTimer());
                     panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = true;
                 }
             }
             else
             {
-                this.GetComponent<Persistencia>().SetRecord(General.GetNumPalomitasDestruidas());
+                this.GetComponent<Persistencia>().SetRecord3(General.GetTimer());
                 panelFinal.transform.GetChild(4).GetComponent<Text>().enabled = true;
             }
-            CancelInvoke("Crono");
-            panelFinal.transform.GetChild(3).GetComponent<Text>().text = "Palomitas:\n" + General.GetNumPalomitasDestruidas();
+            CancelInvoke("Crono3");
+            panelFinal.transform.GetChild(3).GetComponent<Text>().text = "Tiempo:\n" + General.GetTimer();
 
 
         }
